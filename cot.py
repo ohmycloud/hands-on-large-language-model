@@ -31,3 +31,13 @@ cot_prompt = [
 # Generate the output
 outputs = pipe(cot_prompt)
 print(outputs[0]["generated_text"])
+
+
+# zero-shot chain-of-though
+zeroshot_cot_prompt = [
+    {"role": "user", "content": "The cafeteria had 23 apples. If they used 20 to make lunch and bought 6 more, how many apples do they have? Let's think step-by-step."}
+]
+
+# generate the output
+outputs = pipe(zeroshot_cot_prompt)
+print(outputs[0]['generated_text'])
