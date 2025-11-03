@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 model = AutoModelForCausalLM.from_pretrained(
     "microsoft/Phi-3-mini-4k-instruct",
     device_map="cuda",
-    torch_dtype="auto",
+    dtype="auto",
     trust_remote_code=False,
 )
 
@@ -16,6 +16,7 @@ prompt = "Write an email apologizing to Sarah for the tragic gardening mishap. E
 
 # 对输入提示词进行分词
 input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to("cuda")
+print(input_ids)
 
 # 生成文本
 generation_output = model.generate(
