@@ -49,3 +49,27 @@ zeroshot_tot_prompt = [
 # generate the output
 outputs = pipe(zeroshot_tot_prompt)
 print(outputs[0]['generated_text'])
+
+# zeroshot learning: Providing no examples
+zeroshot_prompt = [
+    {"role": "user", "content": "Create a character profile for an RPG game in JSON format."}
+]
+# generate the output
+outputs = pipe(zeroshot_prompt)
+print(outputs[0]['generated_text'])
+
+# one-shot learning: Providing an example of the output structure
+one_shot_template = """Create a short character profile for an RPG game. Make sure to only use this format:
+
+{
+  "description": "A SHORT DESCRIPTION",
+  "name": "THE CHARACTER'S NAME",
+  "armor": "ONE PIECE OF ARMOR",
+  "weapon": "ONE OR MORE WEAPONS"
+}
+"""
+
+one_shot_prompt = [{ "role": "user", "content": one_shot_template }]
+# generate the output
+outputs = pipe(one_shot_prompt)
+print(outputs[0]['generated_text'])
