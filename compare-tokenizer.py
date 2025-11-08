@@ -5,7 +5,7 @@ text = """
 English and CAPITALIZATION
 🎵鸟
 show_tokens False None elif == >= else: two tabs:" " Three tabs: "   "
-12.0*50=600”
+12.0*50=600
 """
 
 colors_list = [
@@ -15,7 +15,14 @@ colors_list = [
 
 @click.command()
 @click.option("--sentence", type=str, default=text, help="The sentence to tokenize")
-@click.option("--tokenizer-name", type=click.Choice(["bert-base-uncased", "bert-base-cased", "soh", "temp"]))
+@click.option("--tokenizer-name", type=click.Choice([
+    "bert-base-uncased",
+    "bert-base-cased",
+    "gpt2",
+    "google/flan-t5-xxl",
+    "bigcode/starcoder2-15b",
+    "microsoft/Phi-3-mini-4k-instruct"])
+)
 def show_tokens(sentence, tokenizer_name):
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
     token_ids = tokenizer(sentence).input_ids
