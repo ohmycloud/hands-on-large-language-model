@@ -10,5 +10,5 @@ if not api_key:
 
 openai_client = OpenAI(
     api_key=api_key,
-    base_url='https://vip.apiyi.com/v1'
+    base_url='https://api.apiyi.com/v1'
 )

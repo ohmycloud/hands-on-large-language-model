@@ -1,13 +1,17 @@
 from utils import openai_client
 
-response = openai_client.completions.create(
-    model="gpt-3.5-turbo-instruct",
-    prompt="I have a white dog named Champ.",
-    temperature=1,
-    max_tokens=16,
-    top_p=0.3,
-    frequency_penalty=0,
-    presence_penalty=0
-)
+prompt="""Suggest three names for a new pet salon business.
+          The generated name ideas should evoke positive emotions and the
+          following key features: Professional, friendly, Personalized Service."""
 
-print(response.choices[0].text.strip())
+response = openai_client.chat.completions.create(
+    model="gpt-4.1",
+    temperature=0.7,
+    max_tokens=100,
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": f"{prompt}"}
+    ]
+)
+content = response.choices[0].message.content
+print(content)
