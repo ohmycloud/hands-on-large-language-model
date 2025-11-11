@@ -8,6 +8,7 @@ response = openai_client.chat.completions.create(
     model="gpt-4.1",
     temperature=0.7,
     max_tokens=100,
+    stop=None,
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": f"{prompt}"}
@@ -15,3 +16,5 @@ response = openai_client.chat.completions.create(
 )
 content = response.choices[0].message.content
 print(content)
+print("\n\n")
+print(response)
