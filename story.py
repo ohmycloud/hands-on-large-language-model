@@ -29,6 +29,7 @@ summary_text = "a girl that find her boyfriend"
 title = chain.invoke({"summary": summary_text})
 
 print(title)
+print("------------end title-----------")
 
 # 角色描述
 # 使用故事梗概和标题创建一个链式架构来生成角色描述
@@ -44,3 +45,20 @@ chain = character_prompt | llm | output_parser
 character_text = "a brave knight who specifically fights data bugs"
 character = chain.invoke({"summary": character_text, "title": title})
 print(character)
+print("------------end character-----------")
+
+# 使用故事梗概、标题和角色描述创建一个链式架构来生成故事
+template = """<s><|user|>
+Create a story about {summary} with the title {title}. The main character is:
+{character}. Only return the story and it cannot be longer than one paragraph.
+<|end|>
+<|assistant|>"""
+story_prompt = PromptTemplate(
+    template=template, input_variables=["summary", "title", "character"]
+)
+
+chain = story_prompt | llm | output_parser
+summary_text = "a girl that find her favorite music"
+story = chain.invoke({"summary": character_text, "title": title, "character": character})
+print(story)
+print("------------end story-----------")
