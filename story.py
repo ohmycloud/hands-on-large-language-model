@@ -25,7 +25,22 @@ output_parser = StrOutputParser()
 chain = title_prompt | llm | output_parser
 
 # 调用链 (使用 invoke)
-summary_text = "a brave knight who specifically fights data bugs"
+summary_text = "a girl that find her boyfriend"
 title = chain.invoke({"summary": summary_text})
 
 print(title)
+
+# 角色描述
+# 使用故事梗概和标题创建一个链式架构来生成角色描述
+template = """<s><|user|>
+Describe the main character of a story about {summary} with the title {title}.
+Use only two sentences.<|end|>
+<|assistant|>"""
+
+character_prompt = PromptTemplate(
+    template=template, input_variables=["summary", "title"]
+)
+chain = character_prompt | llm | output_parser
+character_text = "a brave knight who specifically fights data bugs"
+character = chain.invoke({"summary": character_text, "title": title})
+print(character)
