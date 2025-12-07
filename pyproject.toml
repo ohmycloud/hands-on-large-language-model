@@ -26,3 +26,8 @@ dependencies = [
     "tqdm>=4.67.1",
     "transformers>=4.48.2",
 ]
+
+[tool.uv.workspace]
+members = [
+    "ipynb",
+]
