@@ -10,3 +10,4 @@ wheels/
 .venv
 uv.lock
 .DS_Store
+ipynb/base_embedding_model/
